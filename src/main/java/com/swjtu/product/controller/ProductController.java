@@ -2,17 +2,17 @@ package com.swjtu.product.controller;
 
 import com.swjtu.product.dataobject.ProductCategory;
 import com.swjtu.product.dataobject.ProductInfo;
+import com.swjtu.product.dto.CartDTO;
 import com.swjtu.product.service.ProductCategoryService;
 import com.swjtu.product.service.ProductService;
 import com.swjtu.product.utils.ResultVOUtil;
 import com.swjtu.product.vo.ProductInfoVO;
 import com.swjtu.product.vo.ProductVO;
 import com.swjtu.product.vo.ResultVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/product")
+@Slf4j
 public class ProductController {
 
     @Autowired
@@ -36,6 +37,9 @@ public class ProductController {
     //3、查询类目
     //4、构造数据
 
+    /**
+     * 获取商品列表
+     * */
     @GetMapping("/list")
     public ResultVO<ProductVO> list(){
         //1.查询所有在架商品的信息
@@ -78,5 +82,22 @@ public class ProductController {
             productVOList.add(productVO);
         }
         return ResultVOUtil.success(productVOList);
+    }
+
+    /**
+     * 获取商品信息列表（给订单服务使用）
+     * @param productIdList
+     * @return
+     */
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody  List<String> productIdList){
+
+        List<ProductInfo> productInfoList = productService.findListById(productIdList);
+        return productInfoList;
+    }
+
+    @PostMapping("/decreaseStock")
+    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList){
+        productService.decreaseStock(cartDTOList);
     }
 }

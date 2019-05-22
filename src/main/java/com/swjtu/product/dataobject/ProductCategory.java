@@ -1,9 +1,11 @@
 package com.swjtu.product.dataobject;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -12,10 +14,11 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
+@DynamicUpdate
 public class ProductCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    //自增的写法
     private Integer categoryId;
 
     private String categoryName;

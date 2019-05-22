@@ -30,4 +30,14 @@ public class ProductCategoryServiceImplTest extends ProductApplicationTests {
         System.out.println(productCategoryList);
         Assert.assertTrue(productCategoryList.size()>0);
     }
+
+    @Test
+    public void save(){
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setCategoryId(2);
+        productCategory.setCategoryName("小孩最爱");
+        productCategory.setCategoryType(12);
+        productCategoryService.save(productCategory);
+
+    }
 }

@@ -14,4 +14,5 @@ public interface ProductCategoryService {
 
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 
+    ProductCategory save(ProductCategory productCategory);
 }
