@@ -1,6 +1,6 @@
 package com.swjtu.product.service;
 
-import com.swjtu.product.common.CartDTO;
+import com.swjtu.product.common.DecreaseStockInput;
 import com.swjtu.product.dataobject.ProductInfo;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +28,7 @@ public interface ProductService {
 
     /**
      * 扣库存
-     * @param cartDTOList
+     * @param decreaseStockInputList
      */
-    void decreaseStock(List<CartDTO> cartDTOList);
+    void decreaseStock(List<DecreaseStockInput> decreaseStockInputList);
 }

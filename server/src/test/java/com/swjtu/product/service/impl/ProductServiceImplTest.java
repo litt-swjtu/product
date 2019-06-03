@@ -1,10 +1,9 @@
 package com.swjtu.product.service.impl;
 
 import com.swjtu.product.ProductApplicationTests;
-import com.swjtu.product.common.CartDTO;
+import com.swjtu.product.common.DecreaseStockInput;
 import com.swjtu.product.dataobject.ProductInfo;
 import com.swjtu.product.service.ProductService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +31,7 @@ public class ProductServiceImplTest extends ProductApplicationTests {
 
     @Test
     public void decreaseStock(){
-        CartDTO cartDTO = new CartDTO("10004" , 10);
-        productService.decreaseStock(Arrays.asList(cartDTO));
+        DecreaseStockInput decreaseStockInput = new DecreaseStockInput("10004" , 10);
+        productService.decreaseStock(Arrays.asList(decreaseStockInput));
     }
 }

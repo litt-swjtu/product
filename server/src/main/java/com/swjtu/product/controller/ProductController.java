@@ -1,6 +1,6 @@
 package com.swjtu.product.controller;
 
-import com.swjtu.product.common.CartDTO;
+import com.swjtu.product.common.DecreaseStockInput;
 import com.swjtu.product.dataobject.ProductCategory;
 import com.swjtu.product.dataobject.ProductInfo;
 import com.swjtu.product.service.ProductCategoryService;
@@ -97,7 +97,7 @@ public class ProductController {
     }
 
     @PostMapping("/decreaseStock")
-    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList){
-        productService.decreaseStock(cartDTOList);
+    public void decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList){
+        productService.decreaseStock(decreaseStockInputList);
     }
 }

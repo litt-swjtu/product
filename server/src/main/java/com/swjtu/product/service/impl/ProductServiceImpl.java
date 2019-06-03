@@ -1,6 +1,6 @@
 package com.swjtu.product.service.impl;
 
-import com.swjtu.product.common.CartDTO;
+import com.swjtu.product.common.DecreaseStockInput;
 import com.swjtu.product.dataobject.ProductInfo;
 import com.swjtu.product.enums.ProductStatusEnums;
 import com.swjtu.product.enums.ResultEnums;
@@ -38,16 +38,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void decreaseStock(List<CartDTO> cartDTOList) {
-        for(CartDTO cartDTO: cartDTOList){
-            Optional<ProductInfo> productInfoOptional = repository.findById(cartDTO.getProductId());
+    public void decreaseStock(List<DecreaseStockInput> decreaseStockInputList) {
+        for(DecreaseStockInput decreaseStockInput : decreaseStockInputList){
+            Optional<ProductInfo> productInfoOptional = repository.findById(decreaseStockInput.getProductId());
             //判断商品是否存在
             if(!productInfoOptional.isPresent()){
                 throw new ProductException(ResultEnums.PRODUCT_NOT_EXIST);
             }
             //判断库存是否足够
             ProductInfo productInfo = productInfoOptional.get();
-            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+            Integer result = productInfo.getProductStock() - decreaseStockInput.getProductQuantity();
             if(result <= 0){
                 throw new ProductException(ResultEnums.PRODUCT_STOCK_ERROR);
             }
